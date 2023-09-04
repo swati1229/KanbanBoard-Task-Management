@@ -6,10 +6,7 @@ import Tasks from './pages/Tasks';
 function App() {
   return (
     <div className="App">
-      <Routes>
-        <Route path='/' element={<HomePage />} exact />
-        <Route path='/tasks' element={<Tasks />} exact />
-      </Routes>
+      App
     </div>
   );
 }
