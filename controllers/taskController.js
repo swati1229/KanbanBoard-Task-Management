@@ -58,29 +58,29 @@ const getTaskController = async(req, res) => {
     }
 }
 
-//get single task by user
-const singleTaskController = async(req, res) => {
-    try {
-        const tId = req.params.id;
+// //get single task by user
+// const singleTaskController = async(req, res) => {
+//     try {
+//         const tId = req.params.id;
         
-        const task = await Task.findById(tId);
+//         const task = await Task.findById(tId);
 
-        if(!task)
-        {
-            return res.status(400).send({message: 'Task not found'})
-        }
+//         if(!task)
+//         {
+//             return res.status(400).send({message: 'Task not found'})
+//         }
 
-        return res.status(200).send(task)
+//         return res.status(200).send(task)
 
-    } catch (error) {
-        console.log(error);
-        res.status(500).send({
-            success : false,
-            message: "Error in getting single task",
-            error
-        })
-    }
-}
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).send({
+//             success : false,
+//             message: "Error in getting single task",
+//             error
+//         })
+//     }
+// }
 
 //update task
 const updateTaskController = async(req, res) => {
@@ -136,4 +136,4 @@ const deleteTaskController = async(req, res) => {
     }
 }
 
-module.exports = {createTaskController, getTaskController, singleTaskController, updateTaskController, deleteTaskController}
+module.exports = {createTaskController, getTaskController, updateTaskController, deleteTaskController}
