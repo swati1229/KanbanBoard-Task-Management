@@ -125,7 +125,7 @@ const ShowTask = () => {
                         (provided) => (
                             <Box
                                 backgroundColor='white'
-                                height='75vh'
+                                height='100%'
                                 borderRadius='10px'
                                 key={index}
                                 p={3}
