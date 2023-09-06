@@ -136,4 +136,28 @@ const deleteTaskController = async(req, res) => {
     }
 }
 
-module.exports = {createTaskController, getTaskController, updateTaskController, deleteTaskController}
+//update status
+const updateStatusController = async(req, res) => {
+    try {
+        const { draggableId, destinationDroppableId } = req.body;
+
+        const updatedStatus = await Task.findByIdAndUpdate(draggableId, {status: destinationDroppableId}, {new: true})
+
+        if(!updatedStatus)
+        {
+            return res.status(400).send({message: "Task not found"})
+        }
+
+        return res.status(200).send(updatedStatus)
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success : false,
+            message: "Error in updating status",
+            error
+        })
+    }
+}
+
+module.exports = {createTaskController, getTaskController, updateTaskController, deleteTaskController, updateStatusController}

@@ -1,6 +1,5 @@
-import { Container, Text } from '@chakra-ui/react'
+import { Box, Container, Text } from '@chakra-ui/react'
 import React from 'react'
-import ScrollableFeed from 'react-scrollable-feed'
 import Task from './Task'
 
 const Status = ({status, todos, doing, done}) => {
@@ -22,18 +21,13 @@ const Status = ({status, todos, doing, done}) => {
   }
 
   return (
-    <ScrollableFeed>
-      <Container>
-        <Text fontSize='2xl'as='b'display='flex' justifyContent='center'>
-          {text}
-        </Text>
-        {
-          taskToMap.length > 0 && taskToMap.map((task) => (
-            <Task key={task._id} task={task} bg={bg} />
+    <>
+      {
+        taskToMap.map((task, index) => (
+          <Task key={task._id} task={task} bg={bg} index={index} />
           ))
-        }
-      </Container>
-    </ScrollableFeed>
+      }
+    </>
   )
 }
 

@@ -1,5 +1,5 @@
 const express = require('express')
-const { createTaskController, updateTaskController, deleteTaskController, getTaskController } = require('../controllers/taskController')
+const { createTaskController, updateTaskController, deleteTaskController, getTaskController, updateStatusController } = require('../controllers/taskController')
 const { requireSignIn } = require('../middleware/authMiddleware')
 const router = express.Router()
 
@@ -17,5 +17,8 @@ router.put('/update-task/:id', requireSignIn, updateTaskController)
 
 //delete task
 router.delete('/delete-task/:id', requireSignIn, deleteTaskController)
+
+//update status of task
+router.put('/update-status', requireSignIn, updateStatusController)
 
 module.exports = router

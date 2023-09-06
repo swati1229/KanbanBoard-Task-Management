@@ -12,8 +12,8 @@ const taskModel = new mongoose.Schema({
     status: {
         type: String,
         required: true,
-        enum: ["To Do", "Doing", "Done"],
-        default: "To Do"
+        enum: ["ToDo", "Doing", "Done"],
+        default: "ToDo"
     },
     assignedTo: {
         type: mongoose.ObjectId,

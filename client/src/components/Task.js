@@ -5,8 +5,9 @@ import UpdateTask from './UpdateTask';
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
 import { AuthState } from '../context/AuthProvider';
 import axios from 'axios';
+import { Draggable } from 'react-beautiful-dnd';
 
-const Task = ({task, bg}) => {
+const Task = ({task, bg, index}) => {
 
     const {user, fetchAgain, setFetchAgain} = AuthState()
     const toast = useToast()
@@ -15,7 +16,7 @@ const Task = ({task, bg}) => {
       try {
         const config = {
             headers: {
-                Authorization: `${user.token}`
+                Authorization: `${user?.token}`
             }
         }
 
@@ -46,35 +47,41 @@ const Task = ({task, bg}) => {
     }
     
     return (
-      <Box
-        backgroundColor={bg}
-        borderRadius={5}
-        my={3}
-        padding={2}
-        letterSpacing={0.5}
-        fontSize='xl'
-      >
-        <ShowEachTask task={task}>
-            {task.title}
-        </ShowEachTask>
-        
-        <UpdateTask task={task}>
-          <Tooltip label='Update Task'>
-            <EditIcon
-                color='purple'
-                fontSize='2xl'
-            />
-          </Tooltip>
-        </UpdateTask>
-  
-        <Tooltip label='Delete Task'>
-            <DeleteIcon
-                color='red.500'
-                fontSize='2xl'
-                onClick={handleDelete} 
-            />
-        </Tooltip>
-      </Box>
+      <Draggable key={task._id} draggableId={task._id} index={index}>
+        {(provided) => (
+          <Box
+            backgroundColor={bg}
+            borderRadius={5}
+            my={3}
+            padding={2}
+            letterSpacing={0.5}
+            fontSize='xl'
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            ref={provided.innerRef}
+          >
+            <ShowEachTask task={task}>
+                {task.title}
+            </ShowEachTask>
+            
+            <UpdateTask task={task}>
+              <Tooltip label='Update Task'>
+                <EditIcon
+                    color='purple'
+                    fontSize='2xl'
+                    />
+              </Tooltip>
+            </UpdateTask>
+      
+            <Tooltip label='Delete Task'>
+                <DeleteIcon
+                    fontSize='2xl'
+                    onClick={handleDelete} 
+                    />
+            </Tooltip>
+          </Box>
+        )}
+      </Draggable>
     )
   }
 

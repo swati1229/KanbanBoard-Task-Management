@@ -8,6 +8,7 @@ import ShowTask from '../components/ShowTask'
 const TaskPage = () => {
 
   const {user, fetchAgain, setFetchAgain} = AuthState()
+
   const navigate = useNavigate()
 
   const logoutHandler = () => {
@@ -17,6 +18,9 @@ const TaskPage = () => {
 
   return (
     <div style={{width: '100%'}}>
+      <Flex
+        flexDirection='column'
+      >
         <Flex
           as="header"
           align="center"
@@ -25,11 +29,11 @@ const TaskPage = () => {
           bg="teal.500"
           color="white"
           boxShadow='xl'
-        >
+          >
           <Heading
             as='h1'
             size='lg'
-          >
+            >
             Task Management
           </Heading>
           
@@ -39,11 +43,11 @@ const TaskPage = () => {
                 size="sm"
                 name={user?.name}
                 mr={2}
-              />
+                />
             </Tooltip>
             <Button colorScheme="red" size='sm'
               onClick={logoutHandler}
-            >
+              >
               Logout
             </Button>
           </Flex>
@@ -53,13 +57,14 @@ const TaskPage = () => {
           <Button
             m={3}
             rightIcon={<AddIcon />}
-          >
+            >
             Create New Task 
           </Button>
         </CreateTaskModal>
 
-        {user && <ShowTask user={user} fetchAgain={fetchAgain} />}
-
+        {user && <ShowTask />}
+    
+      </Flex>
     </div>
   )
 }
