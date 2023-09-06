@@ -22,8 +22,7 @@ const Task = ({task, bg, index}) => {
 
         const {data} = await axios.delete(`/api/task/delete-task/${task._id}`, config)
 
-        if(data)
-        {
+        if(data) {
             setFetchAgain(!fetchAgain)
         }
 
@@ -59,17 +58,24 @@ const Task = ({task, bg, index}) => {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
+            display='flex'
+            justifyContent='space-between'
           >
             <ShowEachTask task={task}>
+              <Tooltip label='Click to view description'>
                 {task.title}
+              </Tooltip>
             </ShowEachTask>
-            
+
+            <Box>
             <UpdateTask task={task}>
               <Tooltip label='Update Task'>
                 <EditIcon
                     color='purple'
                     fontSize='2xl'
-                    />
+                    mx='2'
+                    cursor='pointer'
+                />
               </Tooltip>
             </UpdateTask>
       
@@ -77,8 +83,11 @@ const Task = ({task, bg, index}) => {
                 <DeleteIcon
                     fontSize='2xl'
                     onClick={handleDelete} 
-                    />
+                    mx='2'
+                    cursor='pointer'
+                />
             </Tooltip>
+            </Box>
           </Box>
         )}
       </Draggable>

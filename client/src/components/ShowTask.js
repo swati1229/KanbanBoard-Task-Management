@@ -51,8 +51,8 @@ const ShowTask = () => {
         console.log(result);
         const {source, destination} = result
 
-        // if(!destination)
-        //     return;
+        if(!destination)
+            return;
 
         if(source.droppableId === destination.droppableId) {
             return;
